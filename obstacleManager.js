@@ -29,6 +29,7 @@ class ObstacleManager{
     }
 
     addObstacle(x, y) {
+        if (this.grid[y][x] === 2) return;
         this.grid[y][x] = 2;
         this.obstacles.push({x, y});
     }

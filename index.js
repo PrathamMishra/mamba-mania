@@ -6,6 +6,7 @@ const rows = 20, cols = 40;
 let prevTime;
 let started = false;
 let updateMap = true;
+let addingObstacles = false;
 
 function makeFood() { 
     food.generate();
@@ -70,8 +71,22 @@ function onKeyPress(key) {
     }
 }
 
-function onCanvasClick(x, y) {
+function onCanvasMouseDown(x, y) {
     if (!updateMap) return;
+    addingObstacles = true;
     obstacle.addObstacle(Math.floor(x/(width/cols)), Math.floor(y/(height/rows)));
     obstacle.show();
+}
+
+function onCanvasMouseMove(x, y) {
+    if (!updateMap || !addingObstacles) return;
+    obstacle.addObstacle(Math.floor(x/(width/cols)), Math.floor(y/(height/rows)));
+    obstacle.show();
+}
+
+function onCanvasMouseUp(x, y) {
+    if (!updateMap || !addingObstacles) return;
+    obstacle.addObstacle(Math.floor(x/(width/cols)), Math.floor(y/(height/rows)));
+    obstacle.show();
+    addingObstacles = false;
 }
