@@ -57,17 +57,19 @@ class Snake{
         } else if (nextY >= height) {
             nextY = 0;
         }
-        if (this.grid[nextY/this.dimY][nextX/this.dimX] == 1) {
+        let yIndex = Math.round(nextY/this.dimY);
+        let xIndex = Math.round(nextX/this.dimX);
+        if (this.grid[yIndex][xIndex] == 1) {
             const newHead = new SnakeNode(nextX, nextY, this.snakeHead);
             this.snakeHead = newHead;
             this.length++;
-            this.grid[nextY/this.dimY][nextX/this.dimX] = 0;
+            this.grid[yIndex][xIndex] = 0;
             this.makeFood();
             return;
         } else if (
-            this.grid[nextY/this.dimY][nextX/this.dimX] === 2 ||
+            this.grid[yIndex][xIndex] === 2 ||
             (
-                this.grid[nextY/this.dimY][nextX/this.dimX] === 0 &&
+                this.grid[yIndex][xIndex] === 0 &&
                 (
                     nextX !== this.snakeTail.x  ||
                     nextY !== this.snakeTail.y
@@ -80,10 +82,14 @@ class Snake{
         while (currNode) {
             let prevX = currNode.x;
             let prevY = currNode.y;
-            this.grid[currNode.y/this.dimY][currNode.x/this.dimX] = -1;
+            yIndex = Math.round(currNode.y / this.dimY);
+            xIndex = Math.round(currNode.x / this.dimX);
+            this.grid[yIndex][xIndex] = -1;
             currNode.x = nextX;
             currNode.y = nextY;
-            this.grid[nextY/this.dimY][nextX/this.dimX] = 0;
+            yIndex = Math.round(currNode.y / this.dimY);
+            xIndex = Math.round(currNode.x / this.dimX);
+            this.grid[yIndex][xIndex] = 0;
             nextX = prevX;
             nextY = prevY;
             currNode = currNode.next;
