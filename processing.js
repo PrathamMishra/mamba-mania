@@ -125,26 +125,28 @@ function addEventListeners() {
     document.addEventListener('keydown', (event)=>{
         onKeyPress && onKeyPress(event.key);
     });
-    canvas.addEventListener('click', (event)=>{
-        let x = event.clientX - canvas.getBoundingClientRect().left;
-        let y = event.clientY - canvas.getBoundingClientRect().top;
-        onCanvasClick && onCanvasClick(x, y);
-    });
-    canvas.addEventListener('mousedown', (event)=>{
-        let x = event.clientX - canvas.getBoundingClientRect().left;
-        let y = event.clientY - canvas.getBoundingClientRect().top;
-        onCanvasMouseDown && onCanvasMouseDown(x, y);
-    });
-    canvas.addEventListener('mousemove', (event)=>{
-        let x = event.clientX - canvas.getBoundingClientRect().left;
-        let y = event.clientY - canvas.getBoundingClientRect().top;
-        onCanvasMouseMove && onCanvasMouseMove(x, y);
-    });
-    canvas.addEventListener('mouseup', (event)=>{
-        let x = event.clientX - canvas.getBoundingClientRect().left;
-        let y = event.clientY - canvas.getBoundingClientRect().top;
-        onCanvasMouseUp && onCanvasMouseUp(x, y);
-    });
+    if (canvas) {
+        canvas.addEventListener('click', (event)=>{
+            let x = event.clientX - canvas.getBoundingClientRect().left;
+            let y = event.clientY - canvas.getBoundingClientRect().top;
+            onCanvasClick && onCanvasClick(x, y);
+        });
+        canvas.addEventListener('mousedown', (event)=>{
+            let x = event.clientX - canvas.getBoundingClientRect().left;
+            let y = event.clientY - canvas.getBoundingClientRect().top;
+            onCanvasMouseDown && onCanvasMouseDown(x, y);
+        });
+        canvas.addEventListener('mousemove', (event)=>{
+            let x = event.clientX - canvas.getBoundingClientRect().left;
+            let y = event.clientY - canvas.getBoundingClientRect().top;
+            onCanvasMouseMove && onCanvasMouseMove(x, y);
+        });
+        canvas.addEventListener('mouseup', (event)=>{
+            let x = event.clientX - canvas.getBoundingClientRect().left;
+            let y = event.clientY - canvas.getBoundingClientRect().top;
+            onCanvasMouseUp && onCanvasMouseUp(x, y);
+        });
+    }
 }
 
 window.addEventListener("load", function () {
