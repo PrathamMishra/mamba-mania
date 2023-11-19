@@ -121,9 +121,7 @@ function hideFrameRate() {
     showingFrameRate = false;
 }
 
-window.addEventListener("load", function () {
-    setup && setup();
-    console.log("Setup Complete");
+function addEventListeners() {
     document.addEventListener('keydown', (event)=>{
         onKeyPress && onKeyPress(event.key);
     });
@@ -132,6 +130,27 @@ window.addEventListener("load", function () {
         let y = event.clientY - canvas.getBoundingClientRect().top;
         onCanvasClick && onCanvasClick(x, y);
     });
+    canvas.addEventListener('mousedown', (event)=>{
+        let x = event.clientX - canvas.getBoundingClientRect().left;
+        let y = event.clientY - canvas.getBoundingClientRect().top;
+        onCanvasMouseDown && onCanvasMouseDown(x, y);
+    });
+    canvas.addEventListener('mousemove', (event)=>{
+        let x = event.clientX - canvas.getBoundingClientRect().left;
+        let y = event.clientY - canvas.getBoundingClientRect().top;
+        onCanvasMouseMove && onCanvasMouseMove(x, y);
+    });
+    canvas.addEventListener('mouseup', (event)=>{
+        let x = event.clientX - canvas.getBoundingClientRect().left;
+        let y = event.clientY - canvas.getBoundingClientRect().top;
+        onCanvasMouseUp && onCanvasMouseUp(x, y);
+    });
+}
+
+window.addEventListener("load", function () {
+    setup && setup();
+    console.log("Setup Complete");
+    addEventListeners();
     createFrameRateElement();
     if (looping) {
         runframe();
