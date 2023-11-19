@@ -55,9 +55,9 @@ function update() {
     const currTime = new Date();
     if (currTime - prevTime > speed) {
         snake.move();
+        renderMap();
         prevTime = currTime;
     }
-    renderMap();
 }
 
 function onKeyPress(key) {
