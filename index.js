@@ -2,9 +2,10 @@ let snake;
 let food;
 let obstacle;
 let speed = 50;
-const rows = 20, cols = 40;
+let rows = 20, cols = 40;
 let prevTime;
 let started = false;
+let border = true;
 let updateMap = true;
 let addingObstacles = false;
 let deadAudio = new Audio('dead.wav');
@@ -21,36 +22,42 @@ function deadCB() {
     noLoop();
 }
 
-function setup() {
-	createCanvas(1000, 500, document.getElementById('canvasWrapper'));
-	background(220);
-    grid(rows, cols);
-    showFrameRate();
-    logger(true);
+function initializeMap() {
     const gridArr = new Array(rows).fill(null).map(()=>new Array(cols).fill(-1));
     food = new FoodManager(gridArr);
     obstacle = new ObstacleManager(gridArr);
-    obstacle.createBorder();
+    if (border) {
+        obstacle.createBorder();
+    }
     snake = new Snake(gridArr, makeFood, deadCB);
     food.generate();
     prevTime = new Date();
+}
+
+function renderMap() {
+	background(220);
+    grid(rows, cols);
     obstacle.show();
     food.show();
     snake.show();
+}
+
+function setup() {
+	createCanvas(1000, 500, document.getElementById('canvasWrapper'));
+    showFrameRate();
+    logger(true);
+    initializeMap();
+    renderMap();
     noLoop();
 }
 
 function update() {
-	background(220);
-	grid(rows, cols);
-    obstacle.show();
     const currTime = new Date();
     if (currTime - prevTime > speed) {
         snake.move();
         prevTime = currTime;
     }
-    food.show();
-    snake.show();
+    renderMap();
 }
 
 function onKeyPress(key) {
