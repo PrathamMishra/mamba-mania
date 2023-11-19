@@ -25,6 +25,7 @@ class Snake{
             randY = Math.floor(Math.random()*this.grid.length);
         }
         this.snakeHead = new SnakeNode(randX*this.dimX,randY*this.dimY);
+        this.snakeTail = this.snakeHead;
         this.length = 1;
         this.grid[randY][randX] = 0;
     }
@@ -64,8 +65,14 @@ class Snake{
             this.makeFood();
             return;
         } else if (
-            this.grid[nextY/this.dimY][nextX/this.dimX] === 0 || 
-            this.grid[nextY/this.dimY][nextX/this.dimX] === 2
+            this.grid[nextY/this.dimY][nextX/this.dimX] === 2 ||
+            (
+                this.grid[nextY/this.dimY][nextX/this.dimX] === 0 &&
+                (
+                    nextX !== this.snakeTail.x  ||
+                    nextY !== this.snakeTail.y
+                )
+            )
         ) {
             this.deadCB();
             return;
