@@ -7,12 +7,16 @@ let prevTime;
 let started = false;
 let updateMap = true;
 let addingObstacles = false;
+let deadAudio = new Audio('dead.wav');
+let eatFood = new Audio('eat.wav');
 
-function makeFood() { 
+function makeFood() {
+    eatFood.play();
     food.generate();
 }
 
 function deadCB() {
+    deadAudio.play();
     document.getElementById('gameOver').style.display = 'block';
     noLoop();
 }
