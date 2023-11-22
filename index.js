@@ -10,9 +10,25 @@ let updateMap = true;
 let addingObstacles = false;
 let deadAudio = new Audio('dead.wav');
 let eatFood = new Audio('eat.wav');
+let soundCount = 0;
+let foodSoundEnded = true;
+
+eatFood.addEventListener('ended', function () {
+    foodSoundEnded = true;
+    if (soundCount) {
+        foodSoundEnded = false;
+        eatFood.play();
+        soundCount--;
+    }
+})
 
 function makeFood() {
-    eatFood.play();
+    if (foodSoundEnded) {
+        foodSoundEnded = false;
+        eatFood.play();
+    } else {
+        soundCount++;
+    }
     food.generate();
 }
 
