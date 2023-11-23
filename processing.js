@@ -115,8 +115,8 @@ function runframe() {
     } else {
         frameRateElement.style.display = 'none';
     }
-    update && update();
-    if (looping && update && (frameCount < maxFrames)) {
+    window.update && update();
+    if (looping && window.update && (frameCount < maxFrames)) {
         window.requestAnimationFrame(runframe);
     }
 }
@@ -137,28 +137,28 @@ function addEventListeners() {
         canvas.addEventListener('click', (event)=>{
             let x = event.clientX - canvas.getBoundingClientRect().left;
             let y = event.clientY - canvas.getBoundingClientRect().top;
-            onCanvasClick && onCanvasClick(x, y);
+            window.onCanvasClick && onCanvasClick(x, y);
         });
         canvas.addEventListener('mousedown', (event)=>{
             let x = event.clientX - canvas.getBoundingClientRect().left;
             let y = event.clientY - canvas.getBoundingClientRect().top;
-            onCanvasMouseDown && onCanvasMouseDown(x, y);
+            window.onCanvasMouseDown && onCanvasMouseDown(x, y);
         });
         canvas.addEventListener('mousemove', (event)=>{
             let x = event.clientX - canvas.getBoundingClientRect().left;
             let y = event.clientY - canvas.getBoundingClientRect().top;
-            onCanvasMouseMove && onCanvasMouseMove(x, y);
+            window.onCanvasMouseMove && onCanvasMouseMove(x, y);
         });
         canvas.addEventListener('mouseup', (event)=>{
             let x = event.clientX - canvas.getBoundingClientRect().left;
             let y = event.clientY - canvas.getBoundingClientRect().top;
-            onCanvasMouseUp && onCanvasMouseUp(x, y);
+            window.onCanvasMouseUp && onCanvasMouseUp(x, y);
         });
     }
 }
 
 window.addEventListener("load", function () {
-    setup && setup();
+    window.setup && setup();
     console.log("Setup Complete");
     addEventListeners();
     createFrameRateElement();
