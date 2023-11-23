@@ -20,6 +20,14 @@ function createCanvas(canvasWidth, canvasHeight, parent = document.body) {
     parent.appendChild(canvas);
 }
 
+function updateCanvas(canvasWidth, canvasHeight) {
+    if (width === canvasWidth && height === canvasHeight) return;
+    width = canvasWidth;
+    height = canvasHeight;
+    canvas.width = width;
+    canvas.height = height;
+}
+
 function filledRect(x, y, width, height, color){
     const prevFill = ctx.fillStyle;
     ctx.beginPath();
