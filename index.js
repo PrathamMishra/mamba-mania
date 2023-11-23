@@ -3,6 +3,7 @@ let food;
 let obstacle;
 let speed = 50;
 let rows = 20, cols = 40;
+let cellSize = 25;
 let prevTime;
 let started = false;
 let border = true;
@@ -51,15 +52,14 @@ function initializeMap() {
 }
 
 function renderMap() {
-	background(220);
-    grid(rows, cols);
+	background(0);
     obstacle.show();
     food.show();
     snake.show();
 }
 
 function setup() {
-	createCanvas(1000, 500, document.getElementById('canvasWrapper'));
+	createCanvas(cellSize*cols, cellSize*rows, document.getElementById('canvasWrapper'));
     showFrameRate();
     logger(true);
     initializeMap();
